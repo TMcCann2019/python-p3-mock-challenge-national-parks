@@ -1,8 +1,8 @@
 import pytest
 
-from classes.many_to_many import NationalPark
-from classes.many_to_many import Visitor
-from classes.many_to_many import Trip
+from classes.national_park import NationalPark
+from lib.classes.visitor import Visitor
+from lib.classes.trip import Trip
 
 
 class TestVisitor:
@@ -20,16 +20,16 @@ class TestVisitor:
 
         # does not mutate name if value is not a string
         # comment out the next two lines if using Exceptions
-        visitor.name = 2
-        assert visitor.name == "Bob"
+        # visitor.name = 2
+        # assert visitor.name == "Bob"
 
         # does mutate name if value is a valid string
         visitor.name = "Steve"
         assert visitor.name == "Steve"
 
         # uncomment the next two lines if using Exceptions
-        # with pytest.raises(Exception):
-        #     Visitor(2)
+        with pytest.raises(Exception):
+            Visitor(2)
 
     def test_name_has_valid_length(self):
         """can change the visitor's name if between 1 and 15 characters long"""
@@ -37,20 +37,20 @@ class TestVisitor:
         assert vis.name == "Poppy"
 
         # comment out the next two lines if using Exceptions
-        vis.name = "TooLongTobeValid"
-        assert vis.name == "Poppy"
+        # vis.name = "TooLongTobeValid"
+        # assert vis.name == "Poppy"
 
         # comment out the next two lines if using Exceptions
-        vis.name = ""
-        assert vis.name == "Poppy"
+        # vis.name = ""
+        # assert vis.name == "Poppy"
 
         # uncomment the next two lines if using Exceptions
-        # with pytest.raises(Exception):
-        #     Visitor("")
+        with pytest.raises(Exception):
+            Visitor("")
 
         # uncomment the next two lines if using Exceptions
-        # with pytest.raises(Exception):
-        #     Visitor("TooLongTobeValid")
+        with pytest.raises(Exception):
+            Visitor("TooLongTobeValid")
 
     def test_has_many_trips(self):
         """visitor has many Trips"""
@@ -116,15 +116,15 @@ class TestVisitor:
         assert isinstance(vis.national_parks()[0], NationalPark)
         assert isinstance(vis.national_parks()[1], NationalPark)
 
-    def total_visits_at_park(self):
-        """returns the total number of times a visitor has visited a park."""
-        vis = Visitor("Phil")
-        yosemite = NationalPark("Yosemite")
-        rocky_mountain = NationalPark("Rocky Mountain")
-        Trip(vis, yosemite, "May 5th", "May 9th")
-        Trip(vis, yosemite, "May 20th", "May 27th")
-        Trip(vis, yosemite, "January 5th", "January 20th")
-        Trip(vis, rocky_mountain, "January 5th", "January 20th")
+    # def total_visits_at_park(self):
+    #     """returns the total number of times a visitor has visited a park."""
+    #     vis = Visitor("Phil")
+    #     yosemite = NationalPark("Yosemite")
+    #     rocky_mountain = NationalPark("Rocky Mountain")
+    #     Trip(vis, yosemite, "May 5th", "May 9th")
+    #     Trip(vis, yosemite, "May 20th", "May 27th")
+    #     Trip(vis, yosemite, "January 5th", "January 20th")
+    #     Trip(vis, rocky_mountain, "January 5th", "January 20th")
 
-        assert vis.total_visits_at_park(yosemite) == 3
-        assert vis.total_visits_at_park(rocky_mountain) == 1
+    #     assert vis.total_visits_at_park(yosemite) == 3
+    #     assert vis.total_visits_at_park(rocky_mountain) == 1
